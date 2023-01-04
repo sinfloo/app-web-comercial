@@ -5,14 +5,14 @@
 	<div class="card">
 		<div class="card-header">DATOS DEL CLIENTE</div>
 		<div class="card-body">
-			<form class="row  align-items-center"
-				action="${pageContext.request.contextPath}/credits/obtain"
-				method="POST">
-				<div class="col-sm-4">
-					<div class="input-group">
-						<input type="text" class="form-control"
-							placeholder="" name="name" value="${customer.c_name}">
-					</div>
+			<form class="row  align-items-center" action="${pageContext.request.contextPath}/credits/obtain" method="POST">
+				<div class="col-sm-2">
+					<select class="form-select">
+						<option value="1">DNI</option>
+						<option value="2">RUC</option>
+						<option value="3">PASAPORTE</option>
+						<option value="4">CARNET EXT.</option>
+					</select>
 				</div>
 				<div class="col-sm-4">
 					<div class="input-group">
@@ -21,7 +21,12 @@
 						<button class="btn btn-primary" type="submit">Buscar</button>
 					</div>
 				</div>
-
+				<div class="col-sm-6">
+					<div class="input-group">
+						<input type="text" class="form-control"
+							placeholder="" name="name" value="${customer}">
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>

@@ -6,12 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.crediselva.dto.CustomerResponse;
+import com.crediselva.controller.dto.CustomerResponse;
 import com.crediselva.service.CustomerService;
 
 @Controller
+@RequestMapping(path = "/credits")
 public class ControllerCredits {
 	
 	@Autowired
@@ -22,7 +24,7 @@ public class ControllerCredits {
 		return "credits";
 	}
 	
-	@PostMapping(path = "/credits/obtain", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/obtain", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getCreditsForDocument(@RequestParam String document, Model model) {
 		CustomerResponse customerResponse=customerServicce.getObjectForDocument(document);
 		model.addAttribute("customer",customerResponse);
