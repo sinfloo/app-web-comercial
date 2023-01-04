@@ -95,7 +95,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		paramsCustomer.put("c_refe_address",customer.getReferenceAddress());
 		paramsCustomer.put("c_address_business",customer.getAddressBusiness());
 		paramsCustomer.put("c_refe_address_bus",customer.getReferenceAddressBusiness());
-		paramsCustomer.put("n_id_ubigeo",customer.getUbigeo());
+		paramsCustomer.put("n_id_ubigeo",Integer.valueOf(customer.getUbigeo()));
 		paramsCustomer.put("c_phone_main",customer.getPhoneMain());
 		paramsCustomer.put("c_phone_second",customer.getPhoneSecond());
 		paramsCustomer.put("c_email_main",customer.getEmailMain());

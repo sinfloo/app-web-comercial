@@ -22,6 +22,19 @@
 			table.dataTable th {
   				font-size: 1em;
 			}
+			body {
+				background: #FFFBFD;
+			}
+			nav {
+				font-family: inherit;
+				font-weight: normal; 
+				font-size: 18px
+			}
+			nav .navbar-brand{
+				font-family: inherit;
+				font-weight: bold; 
+				font-size: 20px
+			}
         </style>
     </head>
     <body>

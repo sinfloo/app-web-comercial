@@ -3,104 +3,124 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="container mt-4">
 	<div class="card">
-		<div class="card-header fs-4" >Formulario de Clientes</div>
+		<div class="card-header fs-6" style="font-weight: bold;"><i class="bi bi-people"></i> FORMULARIO DE CLIENTES</div>
 		<div class="card-body">
 			<form class="row g-3 needs-validation" action="${pageContext.request.contextPath}/customer/save" method="POST">
-				<div class="col-md-3">
-					<label for="txtTipoDocumento" class="form-label">Tipo Dococumento</label> 
-					<select class="form-select" id="txtTipoDocumento" name="tipdoc">
+				<div class="col-md-2">
+					<label for="txtTipoDocumento"><i class="bi bi-card-list"></i> Tipo Documento</label> 
+					<select class="form-select form-select-sm" id="txtTipoDocumento" name="tipdoc">
 						<option value="1">DNI</option>
 						<option value="6">RUC</option>
 						<option value="4">CARNET EXT.</option>
 						<option value="7">PASAPORTE</option>
 					</select>
-					<div class="valid-feedback">Looks good!</div>
 				</div>
-				<div class="col-md-3">
-					<label for="txtNro" class="form-label">Nro Documento</label> 
-					<input type="text" class="form-control" id="txtNro"	value="${customer.numDoc}" required maxlength="12" name="numDoc">
-					<div class="valid-feedback">Looks good!</div>
+				<div class="col-md-2">
+					<label><i class="bi bi-credit-card"></i> Nro Documento</label> 
+					<input type="text" class="form-control form-control-sm" value="${customer.numDoc}" required maxlength="12" name="numDoc">
 				</div>				
-				<div class="col-md-6">
-					<label for="txtNombres" class="form-label">Nombres</label>
-					<input type="text" class="form-control" id="txtNombres" value="${customer.name}" required name="name">
-					<div class="valid-feedback">Looks good!</div>
+				<div class="col-md-3">
+					<label><i class="bi bi-pencil-square"></i> Nombres</label>
+					<input type="text" class="form-control form-control-sm" id="txtNombres" value="${customer.name}" required name="name">
 				</div>
 				<div class="col-md-3">
-					<label for="txtApellidoPaterno" class="form-label">Apellido Paterno</label> 
-					<input type="text" class="form-control"	id="txtApellidoPaterno" value="${customer.firstname}" required name="firstname">
-					<div class="valid-feedback">Looks good!</div>
+					<label><i class="bi bi-pencil-square"></i> Apellido Paterno</label> 
+					<input type="text" class="form-control form-control-sm"	id="txtApellidoPaterno" value="${customer.firstname}" required name="firstname">
+				</div>
+				<div class="col-md-2">
+					<label><i class="bi bi-pencil-square"></i> Apellido	Materno</label> 
+					<input type="text" class="form-control form-control-sm" id="txtApellidoMaterno" value="${customer.lastname}" required name="lastname">
 				</div>
 				<div class="col-md-3">
-					<label for="txtApellidoMaterno" class="form-label">Apellido	Materno</label> 
-					<input type="text" class="form-control" id="txtApellidoMaterno" value="${customer.lastname}" required name="lastname">
-					<div class="valid-feedback">Looks good!</div>
+					<label><i class="bi bi-calendar2-day-fill"></i> Fecha de Nacimiento</label> 
+					<input type="date" class="form-control form-control-sm" id="txtFechaNacimiento" value="${customer.dateBirth}" required name="dateBirth">
 				</div>
 				<div class="col-md-3">
-					<label for="txtFechaNacimiento" class="form-label">Fecha de Nacimiento</label> 
-					<input type="date" class="form-control" id="txtFechaNacimiento" value="${customer.dateBirth}" required name="dateBirth">
-					<div class="valid-feedback">Looks good!</div>
-				</div>
-				<div class="col-md-3">
-					<label for="txtEstadoCivil" class="form-label">Estado Civil</label>
-					<select class="form-select" id="txtEstadoCivil" name="civilStatus">
+					<label><i class="bi bi-people-fill"></i> Estado Civil</label>
+					<select class="form-select form-select-sm" id="txtEstadoCivil" name="civilStatus">
 						<option value="1">SOLTERO</option>
 						<option value="2">CASADO</option>
 						<option value="3">DIVORCIADO</option>
 					</select>
-					<div class="valid-feedback">Looks good!</div>
+				</div>
+				<div class="col-md-3">
+					<label><i class="bi bi-phone"></i> Telefono 1</label> 
+					<input type="text" class="form-control form-control-sm" value="${customer.phoneMain}" required name="phoneMain">
+				</div>
+				<div class="col-md-3">
+					<label><i class="bi bi-phone"></i> Telefono 2</label> 
+					<input type="text" class="form-control form-control-sm" value="${customer.phoneSecond}" name="phoneSecond">
 				</div>
 				<div class="col-md-6">
-					<label for="txtDireccion" class="form-label">Dirección</label> 
-					<input type="text" class="form-control" id="txtDireccion" value="${customer.address}" required name="address">
-					<div class="valid-feedback">Looks good!</div>
+					<label><i class="bi bi-house"></i> Dirección</label> 
+					<input type="text" class="form-control form-control-sm" id="txtDireccion" value="${customer.address}" required name="address">
 				</div>
 				<div class="col-md-6">
-					<label for="txtRefDireccion" class="form-label">Referencia de Dirección</label> 
-					<input type="text" class="form-control"id="txtRefDireccion" value="${customer.referenceAddress}" required name="referenceAddress">
-					<div class="valid-feedback">Looks good!</div>
+					<label><i class="bi bi-house"></i> Referencia de Dirección</label> 
+					<input type="text" class="form-control form-control-sm"id="txtRefDireccion" value="${customer.referenceAddress}" required name="referenceAddress">
 				</div>
 				<div class="col-md-6">
-					<label for="txtDireccionNego" class="form-label">Dirección de Negocio</label> 
-					<input type="text" class="form-control" id="txtDireccionNego" value="${customer.addressBusiness}" required name="addressBusiness" >
-					<div class="valid-feedback">Looks good!</div>
+					<label><i class="bi bi-building"></i> Dirección de Negocio</label> 
+					<input type="text" class="form-control form-control-sm" id="txtDireccionNego" value="${customer.addressBusiness}" required name="addressBusiness" >
 				</div>
 				<div class="col-md-6">
-					<label for="txtRefDireccionNego" class="form-label">Referencia de Dirección de Negocio</label> 
-					<input type="text" class="form-control" id="txtRefDireccionNego" value="${customer.referenceAddressBusiness}" required name="referenceAddressBusiness">
-					<div class="valid-feedback">Looks good!</div>
+					<label><i class="bi bi-building"></i> Referencia de Dirección de Negocio</label> 
+					<input type="text" class="form-control form-control-sm" id="txtRefDireccionNego" value="${customer.referenceAddressBusiness}" required name="referenceAddressBusiness">
 				</div>  
 				<div class="col-md-4">
-					<label for="txtDepartamento" class="form-label">Departamento</label>
-					<select class="form-select" id="txtDepartamento">
+					<label><i class="bi bi-caret-down-fill"></i> Departamento</label>
+					<select class="form-select form-select-sm" id="txtDepartamento">
 						<option value="0">SELECCIONAR</option>
 						<c:forEach var="departament" items="${departaments}">
 							<option value="${departament.c_departamento_inei}">${departament.c_departamento}</option>
 						</c:forEach>
 					</select>
-					<div class="valid-feedback">Looks good!</div>
 				</div>
 				<div class="col-md-4">
-					<label for="txtProvincia" class="form-label">Provincia</label> <select
-						class="form-select" id="txtProvincia" required>
+					<label><i class="bi bi-caret-down-fill"></i> Provincia</label> 
+					<select	class="form-select form-select-sm" id="txtProvincia" required>
 						<option value="0" depa="0">SELECCIONAR</option>
 						<c:forEach var="province" items="${provinces}">
 							<option value="${province.c_provincia_inei}" depa="${province.c_departamento_inei}">${province.c_provincia}</option>
 						</c:forEach>
 					</select>
-					<div class="valid-feedback">Looks good!</div>
 				</div>
 				<div class="col-md-4">
-					<label for="txtDistrito" class="form-label">Distrito</label> 
-					<select class="form-select" id="txtDistrito" name="ubigeo">
+					<label><i class="bi bi-caret-down-fill"></i> Distrito</label> 
+					<select class="form-select form-select-sm" id="txtDistrito" name="ubigeo">
 						<option value="0" >SELECCIONAR</option>
 					</select>
-					<div class="valid-feedback">Looks good!</div>
 				</div>
-				<div class="col-12">
-					<button class="btn btn-primary" type="submit">GUARDAR CAMBIOS</button>
-					<a href="${pageContext.request.contextPath}/customer/"	class="btn btn-danger" type="submit">CANCELAR</a>
+				<div class="col-md-4">
+					<label><i class="bi bi-envelope"></i> Correo 1</label> 
+					<input type="text" class="form-control form-control-sm" value="${customer.emailMain}" name="emailMain">
 				</div>
+				<div class="col-md-4">
+					<label><i class="bi bi-envelope"></i> Correo 2</label> 
+					<input type="text" class="form-control form-control-sm" value="${customer.emailSecond}" name="emailSecond">
+				</div>
+				<div class="col-md-4">
+					<label><i class="bi bi-cart-plus"></i> Fuente de Ingreso</label> 
+					<input type="text" class="form-control form-control-sm" value="${customer.sourceMoney}" name="sourceMoney">
+				</div>
+				<div class="col-md-6">
+					<label><i class="bi bi-building"></i> Mercado</label> 
+					<input type="text" class="form-control form-control-sm" value="${customer.market}" name="market">
+				</div>
+				<div class="col-md-6">
+					<label><i class="bi bi-building"></i> Sector</label> 
+					<input type="text" class="form-control form-control-sm" value="${customer.sector}" name="sector">
+				</div>
+				<div class="col-md-12">
+					<div class="row g-2">
+						<div class="col-md-3 d-grid mt-1">
+							<button class="btn btn-primary" type="submit"><i class="bi bi-save"></i> GUARDAR</button>
+						</div>	
+						<div class="col-md-2 d-grid mt-1">
+							<a href="${pageContext.request.contextPath}/customer/"	class="btn btn-outline-danger" type="submit"><i class="bi bi-x-circle"></i> CANCELAR</a>
+						</div>	
+					</div>				
+				</div>				
 			</form>
 		</div>
 	</div>
@@ -127,12 +147,12 @@
 	$("#txtProvincia").on('change', function() {
 		// para obter el id del departamento
 		let prov_select = $("#txtProvincia").val()
-		console.log("Provincia:" + prov_select)		
+		alert("Provincia:" + prov_select)		
 		cargarDatos(prov_select)
 	})
 
 	function cargarDatos(id) {
-		var url='http://localhost:8080/app-web-comercial/customer/obtnerDistrito/'+id;
+		var url='/app-web-comercial/customer/obtnerDistrito/'+id;
 		$.ajax({
 			type : 'GET',
 			url : url,

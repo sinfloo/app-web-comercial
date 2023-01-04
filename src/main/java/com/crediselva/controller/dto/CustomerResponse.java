@@ -17,6 +17,18 @@ public class CustomerResponse {
 	private String c_first_name;
 	private String c_last_name;
 	private String c_razon_social;
+	private String c_address;
+	private String c_refe_address;
+	private String c_address_business;
+	private String c_refe_address_bus;
+	private String n_id_ubigeo;
+	private String c_phone_main;
+	private String c_phone_second;
+	private String c_email_main;
+	private String c_email_second;
+	private String c_source_money;
+	private String c_market;
+	private String c_sector;
 	
 	@Override
 	public String toString() {		
