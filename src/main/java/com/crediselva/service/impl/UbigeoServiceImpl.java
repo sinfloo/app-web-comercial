@@ -9,6 +9,7 @@ import com.crediselva.dao.UbigeoDao;
 import com.crediselva.dto.Departament;
 import com.crediselva.dto.District;
 import com.crediselva.dto.Province;
+import com.crediselva.dto.Ubigeo;
 import com.crediselva.service.UbigeoService;
 
 @Service
@@ -30,6 +31,12 @@ public class UbigeoServiceImpl implements UbigeoService{
 	@Override
 	public List<District> getDistrictForProvince(String id_province) {
 		return repository.getDistrictForProvince(id_province);
+	}
+
+	@Override
+	public Ubigeo getUbigeo(String id_ubigeo) {
+		// TODO Auto-generated method stub
+		return repository.getUbigeo(id_ubigeo);
 	}
 
 }

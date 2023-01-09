@@ -19,18 +19,6 @@
             columnDefs: [
                 {
                     targets: 0,
-                    className: 'dt-head-center'
-                },
-                {
-                    targets: 1,
-                    className: 'dt-head-center'
-                },
-                {
-                    targets: 2,
-                    className: 'dt-head-center'
-                },
-                {
-                    targets: 0,
                     className: 'dt-body-center'
                 },
                 {
@@ -39,6 +27,10 @@
                 },
                 {
                     targets: 2,
+                    className: 'dt-body-center'
+                },
+                {
+                    targets: 7,
                     className: 'dt-body-center'
                 }
               ],

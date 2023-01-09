@@ -18,20 +18,10 @@
 					<th>#</th>
 					<th>TIPO</th>
 					<th>N° DOC</th>
-					<th>APELLIDO PATERNO</th>
-					<th>APELLIDO MATERNO</th>
-					<th>NOMBRES</th>
+					<th>NOMBRES </th>
 					<th>DIRECCION</th>
-					<th>RE.DIRECCION</th>
-					<th>DIRECCION NEG.</th>
-					<th>REF. DIR. NEGOCIO</th>
-					<th>UBIGEO</th>
-					<th>TELEFONO 1</th>
-					<th>TELEFONO 2</th>
-					<th>CORREO 1</th>
-					<th>CORREO 2</th>
-					<th>FUENTE INGRESO</th>
-					<th>SECTOR</th>
+					<th>TELEFONO</th>
+					<th>CORREO</th>
 					<th>ACCION</th>
 				</tr>
 			</thead>
@@ -54,23 +44,13 @@
 							</c:if>
 						</td>
 						<td>${customer.c_num_doc}</td>
-						<td>${customer.c_first_name}</td>
-						<td>${customer.c_last_name}</td>
-						<td>${customer.c_name}</td>
+						<td>${customer.c_name} ${customer.c_first_name} ${customer.c_last_name}</td>
 						<td>${customer.c_address}</td>
-						<td>${customer.c_refe_address}</td>
-						<td>${customer.c_address_business}</td>
-						<td>${customer.c_refe_address_bus}</td>
-						<td>${customer.n_id_ubigeo}</td>
 						<td>${customer.c_phone_main}</td>
-						<td>${customer.c_phone_second}</td>
 						<td>${customer.c_email_main}</td>
-						<td>${customer.c_email_second}</td>
-						<td>${customer.c_source_money}</td>
-						<td>${customer.c_sector}</td>
 						<td>
-							<a href=""><i class="bi bi-trash" style="color: #F92C18"></i></a> 
-							<a href=""><i class="bi bi-pencil-square" style="color: #FAAB0B"></i></a>
+							<a href="${pageContext.request.contextPath}/customer/edit/${customer.c_num_doc}"><i class="bi bi-pencil-square" style="color: #FAAB0B"></i></a>
+							<a href="${pageContext.request.contextPath}/customer/view/${customer.c_num_doc}"><i class="bi bi-eye">Detalle</i></a>
 						</td>
 					</tr>
 				</c:forEach>

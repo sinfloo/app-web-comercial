@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ubigeo {
+	private int n_id_ubigeo;
 	private Departament departament;
 	private Province province;
 	private District district;

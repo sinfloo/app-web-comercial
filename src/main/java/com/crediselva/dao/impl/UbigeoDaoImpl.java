@@ -12,6 +12,7 @@ import com.crediselva.dao.UbigeoDao;
 import com.crediselva.dto.Departament;
 import com.crediselva.dto.District;
 import com.crediselva.dto.Province;
+import com.crediselva.dto.Ubigeo;
 
 @Repository
 public class UbigeoDaoImpl implements UbigeoDao {
@@ -34,8 +35,8 @@ public class UbigeoDaoImpl implements UbigeoDao {
 
 	@Override
 	public List<Province> getProvinceForDepartament(String id_departament) {
-		String sql="SELECT DISTINCT c_provincia_inei,c_departamento_inei,c_provincia FROM m_ubigeo";
-		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+		String sql="SELECT DISTINCT c_provincia_inei,c_departamento_inei,c_provincia FROM m_ubigeo where c_departamento_inei=?";
+		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,id_departament);
 		List<Province> listProv = new ArrayList<Province>(); 
 		list.forEach(d -> {
 			Province prov = new Province((String)d.get("c_provincia_inei"),(String)d.get("c_departamento_inei"), (String)d.get("c_provincia"));
@@ -54,6 +55,14 @@ public class UbigeoDaoImpl implements UbigeoDao {
 			listDist.add(dis);
 		}); 
 		return listDist;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public Ubigeo getUbigeo(String id_ubigeo) {
+		String sql="SELECT n_id_ubigeo,c_ubigeo_inei,c_distrito,c_provincia_inei,c_provincia,c_departamento_inei,c_departamento FROM m_ubigeo where n_id_ubigeo=?";
+		Ubigeo ubigeo=jdbcTemplate.queryForObject(sql,new Object[] {id_ubigeo},new UbigeoRowMapper());		
+		return ubigeo;
 	}
 
 

@@ -1,5 +1,7 @@
 package com.crediselva.controller.dto;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,8 @@ public class CustomerResponse {
 	private String c_name;
 	private String c_first_name;
 	private String c_last_name;
+	private Date d_date_birth;
+	private String c_civil_status;
 	private String c_razon_social;
 	private String c_address;
 	private String c_refe_address;
@@ -29,6 +33,7 @@ public class CustomerResponse {
 	private String c_source_money;
 	private String c_market;
 	private String c_sector;
+	private String c_state;
 	
 	@Override
 	public String toString() {		

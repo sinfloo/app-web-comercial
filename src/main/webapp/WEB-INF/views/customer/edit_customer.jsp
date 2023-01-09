@@ -17,6 +17,7 @@
 				</div>
 				<div class="col-md-2">
 					<label><i class="bi bi-credit-card"></i> Nro Documento</label> 
+					<input type="hidden" value="${customer.id_customer}" name="id_customer">
 					<input type="text" class="form-control form-control-sm" value="${customer.numDoc}" required maxlength="12" name="numDoc">
 				</div>				
 				<div class="col-md-3">
@@ -45,32 +46,35 @@
 				</div>
 				<div class="col-md-3">
 					<label><i class="bi bi-phone"></i> Telefono 1</label> 
-					<input type="text" class="form-control form-control-sm" value="${customer.phoneMain}" required name="phoneMain">
+					<input type="text" class="form-control form-control-sm" value="${customer.phoneMain}" required maxlength="9" name="phoneMain">
 				</div>
 				<div class="col-md-3">
 					<label><i class="bi bi-phone"></i> Telefono 2</label> 
-					<input type="text" class="form-control form-control-sm" value="${customer.phoneSecond}" name="phoneSecond">
+					<input type="text" class="form-control form-control-sm" value="${customer.phoneSecond}" maxlength="9" name="phoneSecond">
 				</div>
 				<div class="col-md-6">
 					<label><i class="bi bi-house"></i> Dirección</label> 
-					<input type="text" class="form-control form-control-sm" id="txtDireccion" value="${customer.address}" required name="address">
+					<input type="text" class="form-control form-control-sm" value="${customer.address}" required name="address">
 				</div>
 				<div class="col-md-6">
 					<label><i class="bi bi-house"></i> Referencia de Dirección</label> 
-					<input type="text" class="form-control form-control-sm"id="txtRefDireccion" value="${customer.referenceAddress}" required name="referenceAddress">
+					<input type="text" class="form-control form-control-sm" value="${customer.referenceAddress}" required name="referenceAddress">
 				</div>
 				<div class="col-md-6">
 					<label><i class="bi bi-building"></i> Dirección de Negocio</label> 
-					<input type="text" class="form-control form-control-sm" id="txtDireccionNego" value="${customer.addressBusiness}" required name="addressBusiness" >
+					<input type="text" class="form-control form-control-sm" value="${customer.addressBusiness}" required name="addressBusiness" >
 				</div>
 				<div class="col-md-6">
 					<label><i class="bi bi-building"></i> Referencia de Dirección de Negocio</label> 
-					<input type="text" class="form-control form-control-sm" id="txtRefDireccionNego" value="${customer.referenceAddressBusiness}" required name="referenceAddressBusiness">
+					<input type="text" class="form-control form-control-sm"  value="${customer.referenceAddressBusiness}" required name="referenceAddressBusiness">
 				</div>  
 				<div class="col-md-4">
 					<label><i class="bi bi-caret-down-fill"></i> Departamento</label>
 					<select class="form-select form-select-sm" id="txtDepartamento">
 						<option value="0">SELECCIONAR</option>
+						<c:if test="${ubigeo!=null}">
+							<option selected value="${ubigeo.departament.c_departamento_inei}">${ubigeo.departament.c_departamento}</option>
+						</c:if>
 						<c:forEach var="departament" items="${departaments}">
 							<option value="${departament.c_departamento_inei}">${departament.c_departamento}</option>
 						</c:forEach>
@@ -79,16 +83,19 @@
 				<div class="col-md-4">
 					<label><i class="bi bi-caret-down-fill"></i> Provincia</label> 
 					<select	class="form-select form-select-sm" id="txtProvincia" required>
-						<option value="0" depa="0">SELECCIONAR</option>
-						<c:forEach var="province" items="${provinces}">
-							<option value="${province.c_provincia_inei}" depa="${province.c_departamento_inei}">${province.c_provincia}</option>
-						</c:forEach>
+						<option value="0" >SELECCIONAR</option>
+						<c:if test="${ubigeo!=null}">
+							<option selected value="${ubigeo.province.c_provincia_inei}">${ubigeo.province.c_provincia}</option>
+						</c:if>
 					</select>
 				</div>
 				<div class="col-md-4">
 					<label><i class="bi bi-caret-down-fill"></i> Distrito</label> 
 					<select class="form-select form-select-sm" id="txtDistrito" name="ubigeo">
 						<option value="0" >SELECCIONAR</option>
+						<c:if test="${ubigeo!=null}">
+							<option selected value="${ubigeo.n_id_ubigeo}">${ubigeo.district.c_distrito}</option>
+						</c:if>
 					</select>
 				</div>
 				<div class="col-md-4">
@@ -127,6 +134,7 @@
 </div>
 <%@ include file="../commons/footer.jsp"%>
 <script>
+	
 	$("#txtDepartamento").on('change', function() {
 		$('#txtProvincia option:first').prop('selected',true);
 		$("#txtDistrito").empty();
@@ -144,28 +152,54 @@
 			}
 		})
 	})
-	$("#txtProvincia").on('change', function() {
+	$("#txtDepartamento").on('change', function() {
 		// para obter el id del departamento
-		let prov_select = $("#txtProvincia").val()
-		alert("Provincia:" + prov_select)		
-		cargarDatos(prov_select)
+		let dep_select = $("#txtDepartamento").val()	
+		getProvince(dep_select)
 	})
 
-	function cargarDatos(id) {
-		var url='/app-web-comercial/customer/obtnerDistrito/'+id;
+
+	function getProvince(id_departament) {
+		var url='/app-web-comercial/customer/getProvince/'+id_departament;
 		$.ajax({
 			type : 'GET',
 			url : url,
 			contentType: 'application/json',
 			async : true,
 			success : function(response) {				
-				mostrarDatos(response)
+				showProvince(response)
+			}
+		});
+	}
+	function showProvince(response) {
+		$("#txtProvincia").empty();
+		$('#txtProvincia').append(new Option('SELECCIONAR', '0'))
+         for (var i = 0; i < response.length; i++) {
+        	 $('#txtProvincia').append(new Option(response[i].c_provincia, response[i].c_provincia_inei))
+		}
+		$('#txtProvincia option:first').prop('selected',true); //Para colocar el primer valor
+		 
+	}
+	$("#txtProvincia").on('change', function() {
+		// para obter el id del departamento
+		let prov_select = $("#txtProvincia").val()		
+		getDistrict(prov_select)
+	})
+	function getDistrict(id_province) {
+		var url='/app-web-comercial/customer/getDistrict/'+id_province;
+		$.ajax({
+			type : 'GET',
+			url : url,
+			contentType: 'application/json',
+			async : true,
+			success : function(response) {				
+				showDistrict(response)
 			}
 		});
 	}
 
 
-	function mostrarDatos(response) {
+	function showDistrict(response) {
 		$("#txtDistrito").empty();
 		$('#txtDistrito').append(new Option('SELECCIONAR', '0'))
          for (var i = 0; i < response.length; i++) {
