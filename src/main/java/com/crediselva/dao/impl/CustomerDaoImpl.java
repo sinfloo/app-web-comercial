@@ -1,6 +1,10 @@
 
 package com.crediselva.dao.impl;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +13,7 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
@@ -106,12 +111,52 @@ public class CustomerDaoImpl implements CustomerDao {
 			paramsCustomer.put("c_email_second", customer.getEmailSecond());
 			paramsCustomer.put("c_source_money", customer.getSourceMoney());
 			paramsCustomer.put("c_market", customer.getMarket());
-			paramsCustomer.put("c_sector", customer.getSector());
+			paramsCustomer.put("n_id_sector", customer.getSector().getId_sector());
 			paramsCustomer.put("n_id_person", id_person);
 			paramsCustomer.put("c_state", customer.getState());
 			jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("m_customer").usingGeneratedKeyColumns("n_id_customer");
 			return jdbcInsert.executeAndReturnKey(paramsCustomer).intValue();
 		} else {
+			String sql="UPDATE m_person SET c_dni =?, c_name = ?, c_first_name = ?, c_last_name = ?, d_date_birth = ? WHERE c_dni = ?";
+			jdbcTemplate.update(new PreparedStatementCreator() {				
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					PreparedStatement ps=con.prepareStatement(sql);
+					ps.setString(1, customer.getNumDoc());
+					ps.setString(2, Utils.convertToUpperCase(customer.getName()));
+					ps.setString(3, Utils.convertToUpperCase(customer.getFirstname()));
+					ps.setString(4, Utils.convertToUpperCase(customer.getLastname()));
+					ps.setDate(5, customer.getDateBirth());
+					ps.setString(6, customer.getNumDoc());
+					return ps;
+				}
+			});
+			String sqlCustomer="UPDATE m_customer SET c_razon_social = ?, c_address = ?, c_refe_address =  ?, c_address_business =  ?, c_refe_address_bus =  ?,n_id_ubigeo=?,\r\n"
+					+ " c_phone_main = ?, c_phone_second = ?, c_email_main = ?, c_email_second = ?, c_source_money = ?, c_market = ?, n_id_sector = ?, d_audit_date = ?, c_state = ? \r\n"
+					+ "WHERE n_id_customer = ?";
+			jdbcTemplate.update(new PreparedStatementCreator() {				
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					PreparedStatement ps=con.prepareStatement(sqlCustomer);
+					ps.setString(1, Utils.convertToUpperCase(customer.getRazonSocial() != null ? customer.getRazonSocial() : "-"));
+					ps.setString(2, Utils.convertToUpperCase(customer.getAddress()));
+					ps.setString(3, Utils.convertToUpperCase(customer.getReferenceAddress()));
+					ps.setString(4, Utils.convertToUpperCase(customer.getAddressBusiness()));
+					ps.setString(5, Utils.convertToUpperCase(customer.getReferenceAddressBusiness()));
+					ps.setInt(6,Integer.valueOf(customer.getUbigeo()));
+					ps.setString(7, customer.getPhoneMain());
+					ps.setString(8, customer.getPhoneSecond());
+					ps.setString(9, customer.getEmailMain());
+					ps.setString(10, customer.getEmailSecond());
+					ps.setString(11, customer.getSourceMoney());
+					ps.setString(12, customer.getMarket());
+					ps.setInt(13, customer.getSector().getId_sector());
+					ps.setDate(14, new Date(new java.util.Date().getTime()));
+					ps.setString(15, customer.getState());
+					ps.setInt(16, customer.getId_customer());
+					return ps;
+				}
+			});
 			return 0;
 		}
 

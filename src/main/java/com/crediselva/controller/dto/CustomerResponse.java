@@ -32,7 +32,7 @@ public class CustomerResponse {
 	private String c_email_second;
 	private String c_source_money;
 	private String c_market;
-	private String c_sector;
+	private int n_id_sector;
 	private String c_state;
 	
 	@Override

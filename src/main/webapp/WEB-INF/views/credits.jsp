@@ -6,7 +6,7 @@
 		<div class="card-header">DATOS DEL CLIENTE</div>
 		<div class="card-body">
 			<form class="row  align-items-center" action="${pageContext.request.contextPath}/credits/obtain" method="POST">
-				<div class="col-sm-2">
+				<div class="col-sm-2 mb-3">
 					<select class="form-select">
 						<option value="1">DNI</option>
 						<option value="2">RUC</option>
@@ -14,14 +14,14 @@
 						<option value="4">CARNET EXT.</option>
 					</select>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4 mb-3">
 					<div class="input-group">
 						<input type="text" class="form-control"
 							placeholder="Ingrese Numero" name="document" value="${customer.c_num_doc}">
 						<button class="btn btn-primary" type="submit">Buscar</button>
 					</div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-6 mb-3">
 					<div class="input-group">
 						<input type="text" class="form-control"
 							placeholder="" name="name" value="${customer}">

@@ -61,7 +61,12 @@ public class UbigeoDaoImpl implements UbigeoDao {
 	@Override
 	public Ubigeo getUbigeo(String id_ubigeo) {
 		String sql="SELECT n_id_ubigeo,c_ubigeo_inei,c_distrito,c_provincia_inei,c_provincia,c_departamento_inei,c_departamento FROM m_ubigeo where n_id_ubigeo=?";
-		Ubigeo ubigeo=jdbcTemplate.queryForObject(sql,new Object[] {id_ubigeo},new UbigeoRowMapper());		
+		Ubigeo ubigeo=null;
+		try {
+			ubigeo=jdbcTemplate.queryForObject(sql,new Object[] {id_ubigeo},new UbigeoRowMapper());
+		} catch (Exception e) {
+			ubigeo=new Ubigeo();
+		}						
 		return ubigeo;
 	}
 

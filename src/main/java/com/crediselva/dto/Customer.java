@@ -27,6 +27,6 @@ public class Customer extends Person{
     private String emailSecond;
     private String sourceMoney;
     private String market;
-    private String sector;
+    private Sector sector;
     private String state;
 }
